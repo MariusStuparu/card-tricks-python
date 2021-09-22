@@ -29,15 +29,22 @@ class CardTest(unittest.TestCase):
         self.assertEqual(self.card.getCardFull(), assumeText)
 
     def test_init_noargs(self):
-        with self.assertRaises(TypeError):
+        with self.assertRaises(TypeError) as context:
             card = Card.Card()
+            self.assertNotIsInstance(card, Card.Card)
+            errorText = str(context.exception)
+            self.assertTrue(errorText.find('missing 2 required positional arguments'))
 
     def test_init_wrong_args(self):
         with self.assertRaises(TypeError):
             card1 = Card.Card(0)
+            self.assertNotIsInstance(card1, Card.Card)
             card2 = Card.Card(1, 'not')
+            self.assertNotIsInstance(card2, Card.Card)
             card3 = Card.Card(20, 'heart')
+            self.assertNotIsInstance(card3, Card.Card)
             card4 = Card.Card(None, 'diamonds')
+            self.assertNotIsInstance(card4, Card.Card)
 
 
 if __name__ == '__main__':
