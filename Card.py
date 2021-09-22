@@ -21,7 +21,7 @@ class Card:
             if colour in CARD_COLOURS:
                 self.__colour = colour
             else:
-                raise ValueError(f'Error initializing card: value {value} is invalid. Accepted colours are {", ".join(CARD_COLOURS)}')
+                raise ValueError(f'Error initializing card: colour {colour} is invalid. Accepted colours are {", ".join(CARD_COLOURS)}')
         except ValueError as vErr:
             print(vErr)
             raise
