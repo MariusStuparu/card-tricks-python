@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from .constants import CARD_VALUES, CARD_COLOURS
+from constants import CARD_VALUES, CARD_COLOURS
 
 
 class Card:
@@ -16,13 +16,13 @@ class Card:
             if value in CARD_VALUES:
                 self.__value = value
             else:
-                raise ValueError(f'Error initializing card: value {value} is invalid. Accepted range is 1..13')
+                raise TypeError(f'Error initializing card: value {value} is invalid. Accepted range is 1..13')
 
             if colour in CARD_COLOURS:
                 self.__colour = colour
             else:
-                raise ValueError(f'Error initializing card: colour {colour} is invalid. Accepted colours are {", ".join(CARD_COLOURS)}')
-        except ValueError as vErr:
+                raise TypeError(f'Error initializing card: colour {colour} is invalid. Accepted colours are {", ".join(CARD_COLOURS)}')
+        except TypeError as vErr:
             print(vErr)
             raise
 
