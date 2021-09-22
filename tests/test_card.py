@@ -3,7 +3,7 @@
 import unittest
 from random import randint
 
-from Card import Card
+from Card.Card import Card
 from constants import CARD_VALUES, CARD_COLOURS
 
 
@@ -13,10 +13,10 @@ class CardTest(unittest.TestCase):
         randColour = randint(0, len(CARD_COLOURS) - 1)
         self.value = list(CARD_VALUES)[randValue]
         self.colour = CARD_COLOURS[randColour]
-        self.card = Card.Card(self.value, self.colour)
+        self.card = Card(self.value, self.colour)
 
     def test_init(self):
-        self.assertIsInstance(self.card, Card.Card)
+        self.assertIsInstance(self.card, Card)
 
     def test_get_value(self):
         self.assertEqual(self.card.getCardValue(), self.value)
@@ -30,21 +30,21 @@ class CardTest(unittest.TestCase):
 
     def test_init_noargs(self):
         with self.assertRaises(TypeError) as context:
-            card = Card.Card()
-            self.assertNotIsInstance(card, Card.Card)
+            card = Card()
+            self.assertNotIsInstance(card, Card)
             errorText = str(context.exception)
             self.assertTrue(errorText.find('missing 2 required positional arguments'))
 
     def test_init_wrong_args(self):
         with self.assertRaises(TypeError):
-            card1 = Card.Card(0)
-            self.assertNotIsInstance(card1, Card.Card)
-            card2 = Card.Card(1, 'not')
-            self.assertNotIsInstance(card2, Card.Card)
-            card3 = Card.Card(20, 'heart')
-            self.assertNotIsInstance(card3, Card.Card)
-            card4 = Card.Card(None, 'diamonds')
-            self.assertNotIsInstance(card4, Card.Card)
+            card1 = Card(0)
+            self.assertNotIsInstance(card1, Card)
+            card2 = Card(1, 'not')
+            self.assertNotIsInstance(card2, Card)
+            card3 = Card(20, 'heart')
+            self.assertNotIsInstance(card3, Card)
+            card4 = Card(None, 'diamonds')
+            self.assertNotIsInstance(card4, Card)
 
 
 if __name__ == '__main__':

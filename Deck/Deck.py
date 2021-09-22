@@ -4,7 +4,7 @@ from random import shuffle, randrange
 from typing import Optional
 
 from constants import CARD_VALUES, CARD_COLOURS
-from Card import Card
+from Card.Card import Card
 
 
 class Deck:
