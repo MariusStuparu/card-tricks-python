@@ -15,17 +15,21 @@ class Deck:
     __cardInHand: Optional[Card] = None
 
     def __init__(self, shuffleAtStart: bool = False):
-        for col in CARD_COLOURS:
-            for val in CARD_VALUES:
-                try:
+        try:
+            for col in CARD_COLOURS:
+                for val in CARD_VALUES:
                     newCard = Card(val, col)
                     self.__deck.append(newCard)
-                except ValueError as vErr:
-                    print('Error generating the deck of cards')
-                    print(vErr)
-                else:
-                    if shuffleAtStart:
-                        self.shuffleDeck()
+
+            if len(self.__deck) != 52:
+                """I wish I could write 42 here..."""
+                raise ValueError('Deck is not full!')
+        except ValueError as vErr:
+            print('Error generating the deck of cards:')
+            print(vErr)
+        else:
+            if shuffleAtStart:
+                self.shuffleDeck()
 
     def shuffleDeck(self):
         """
