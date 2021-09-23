@@ -50,6 +50,12 @@ class DeckTest(unittest.TestCase):
         self.deck.putCardBack(card)
         self.assertEqual(self.deck.countDeck(), 52)
 
+    def test_attempt_double_insertion(self):
+        card = self.deck.takeOneCard(fromWhere='anywhere')
+        self.deck.putCardBack(card)
+        with self.assertRaises(IndexError):
+            self.deck.putCardBack(card)
+
 
 if __name__ == '__main__':
     unittest.main()

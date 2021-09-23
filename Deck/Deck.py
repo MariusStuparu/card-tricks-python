@@ -66,7 +66,7 @@ class Deck:
         :param cardInHand
         :param where: ['top', 'bottom', 'anywhere']
         """
-        if cardInHand:
+        if isinstance(cardInHand, Card):
             if where == 'top':
                 index = len(self.__deck)
             elif where == 'bottom':
@@ -81,6 +81,7 @@ class Deck:
                     raise IndexError('That card is already in the deck.')
             except IndexError as iErr:
                 print(iErr)
+                raise
         else:
             print('Your hands are empty, silly!')
 
