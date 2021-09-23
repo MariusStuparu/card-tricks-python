@@ -43,7 +43,7 @@ class CardTest(unittest.TestCase):
             self.assertNotIsInstance(card2, Card)
             card3 = Card(20, 'heart')
             self.assertNotIsInstance(card3, Card)
-            card4 = Card(None, 'diamonds')
+            card4 = Card(None, 'diamond')
             self.assertNotIsInstance(card4, Card)
 
 
