@@ -8,10 +8,11 @@ class Card:
     Simple class for standard playing cards
     For simplicity, cards have only numeric values, from 1 to 13
     """
-    __value = None
-    __colour = None
 
     def __init__(self, value: int, colour: str):
+        self.__value = None
+        self.__colour = None
+
         try:
             if value in CARD_VALUES:
                 self.__value = value
