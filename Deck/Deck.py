@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from random import shuffle, randrange
-from typing import Optional
 
 from constants import CARD_VALUES, CARD_COLOURS
 from Card.Card import Card
@@ -11,10 +10,10 @@ class Deck:
     """
     Simple deck of cards class
     """
-    __deck: list[Card] = []
-    __cardInHand: Optional[Card] = None
 
     def __init__(self, shuffleAtStart: bool = False):
+        self.__deck: list[Card] = []
+
         try:
             for col in CARD_COLOURS:
                 for val in CARD_VALUES:
@@ -31,13 +30,20 @@ class Deck:
             if shuffleAtStart:
                 self.shuffleDeck()
 
+    def countDeck(self) -> int:
+        """
+        Count how many cards are in the deck
+        :return: int
+        """
+        return len(self.__deck)
+
     def shuffleDeck(self):
         """
         Shuffle the deck
         """
         shuffle(self.__deck)
 
-    def takeOneCard(self, fromWhere: str = 'top'):
+    def takeOneCard(self, fromWhere: str = 'top') -> Card:
         """
         Take one card from the deck. Don't show it.
         :param fromWhere: ['top', 'bottom', 'anywhere']
@@ -50,25 +56,17 @@ class Deck:
             else:
                 index = randrange(1, len(self.__deck))
 
-            self.__cardInHand = self.__deck.pop(index)
+            return self.__deck.pop(index)
         else:
             print('There are no more cards in deck')
 
-    def showCard(self):
-        """
-        Show the card in hand
-        """
-        if self.__cardInHand:
-            print(f'You have: {self.__cardInHand.getCardFull()}')
-        else:
-            print('Your hands are empty, silly!')
-
-    def putCardBack(self, where: str = 'anywhere'):
+    def putCardBack(self, cardInHand: Card, where: str = 'anywhere'):
         """
         Put the card back in the deck
+        :param cardInHand
         :param where: ['top', 'bottom', 'anywhere']
         """
-        if self.__cardInHand:
+        if cardInHand:
             if where == 'top':
                 index = len(self.__deck)
             elif where == 'bottom':
@@ -76,8 +74,13 @@ class Deck:
             else:
                 index = randrange(0, len(self.__deck)+1)
 
-            self.__deck.insert(index, self.__cardInHand)
-            self.__cardInHand = None
+            try:
+                if not self.__deck.count(cardInHand):
+                    self.__deck.insert(index, cardInHand)
+                else:
+                    raise IndexError('That card is already in the deck.')
+            except IndexError as iErr:
+                print(iErr)
         else:
             print('Your hands are empty, silly!')
 
